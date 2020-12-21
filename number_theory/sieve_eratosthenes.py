@@ -1,24 +1,22 @@
-def sieve_erat(n):
-    """
-    Returns a set of primes up to n (inclusive).
+"""
+Sieve eratosthenes algorithm, returns a set of primes up to and including 'n'.
+"""
 
-    >>> sieve_erat(11) == {2,3,5,7,11}
-    True
-    """
+def sieve_erat(n):
+    A = [True] * (n + 2)
+    u = int(n**0.5)+1
     primes = set()
 
-    A = [True] * (n + 2)
-
-    for i in range(2, int(n**0.5)+1):
+    for i in range(2, u):
         if A[i]:
+            primes.add(i)
             j = i*2
             while j < n:
                 A[j] = False
                 j += i
     
-
-    for i in range(2, n+1):
-        if A[i]:
-            primes.add(i)
+    for j in range(u, n+1):
+        if A[j]:
+            primes.add(j)
 
     return primes
